@@ -4,6 +4,7 @@ import random
 import Joking
 from translate import Translator
 from functions import clima
+from functions import news
 
 translator = Translator(to_lang="pt-br")
 
@@ -35,6 +36,10 @@ class gerais(commands.Cog):
     @comando.command(help="Ver o clima agora")
     async def clima(self, ctx, *city):
         await ctx.send(clima.climaAgora(city))
+
+    @comando.command(help="Pesquisar uma notícia")
+    async def news(self, ctx, *termo):
+        await ctx.send(embed=news.searchNews(termo))
 
 
 async def setup(bot: commands.Bot):
