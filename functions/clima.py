@@ -19,7 +19,7 @@ def climaAgora(city):
 def proxClima(city):
     lista=[]
     var=0
-    link = f"https://api.openweathermap.org/data/2.5/forecast?q={unidecode(' '.join(city))}&lang=pt_br&appid={'13e6fa6dfc3186b91c69776d6a59a910'}"
+    link = f"https://api.openweathermap.org/data/2.5/forecast?q={unidecode(' '.join(city))}&lang=pt_br&appid={os.getenv('API_KEY')}"
     requisição = requests.get(link)
     requisição_dic=requisição.json()
     nome = requisição_dic['city']['name']
