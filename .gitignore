@@ -1,0 +1,5 @@
+.env
+../../Downloads/discord-bot/discord-bot-Branch2/.idea
+__pycache__
+.idea/
+cogs/__pycache__
