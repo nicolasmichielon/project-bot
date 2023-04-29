@@ -3,7 +3,7 @@ from discord.ext import commands
 import random
 import Joking
 from translate import Translator
-from functions import clima
+from functions import clima, ajuda
 from functions import news
 
 translator = Translator(to_lang="pt-br")
@@ -30,16 +30,22 @@ class gerais(commands.Cog):
         await ctx.channel.purge(limit=amount)
 
     @comando.command(help="Conta uma piada")
-    async def piada(self, ctx):
+    async def joke(self, ctx):
         await ctx.send(f"{translator.translate(Joking.random_joke())}")
 
     @comando.command(help="Ver o clima agora")
-    async def clima(self, ctx, *city):
+    async def weather(self, ctx, *city):
         await ctx.send(clima.climaAgora(city))
+    @comando.command(help="Ver o clima nos próximos 5 dias")
+    async def forecast(self, ctx, *city):
+        await ctx.send(embed=clima.proxClima(city))
 
     @comando.command(help="Pesquisar uma notícia")
     async def news(self, ctx, *termo):
         await ctx.send(embed=news.searchNews(termo))
+    @comando.command(help="Ver todos os comandos")
+    async def assist(self,ctx,*mensagem):
+        await ctx.send(embed=ajuda.ajuda(mensagem))
 
 
 async def setup(bot: commands.Bot):
