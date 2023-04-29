@@ -1,9 +1,11 @@
 import os
-
+from unidecode import unidecode
 import requests
-cidade = "Florianópolis"
-def climaAgora():
-    link =f"https://api.openweathermap.org/data/2.5/weather?q={cidade}&lang=pt_br&appid={os.getenv('API_KEY')}"
+
+
+def climaAgora(city):
+    print(' '.join(city))
+    link =f"https://api.openweathermap.org/data/2.5/weather?q={unidecode(' '.join(city))}&lang=pt_br&appid={os.getenv('API_KEY')}"
 
     requisição = requests.get(link)
     requisição_dic=requisição.json()
@@ -12,8 +14,8 @@ def climaAgora():
 
     return str(f"A temperatura está em {temp: .2f}") + " ºC, " + descricao
 
-def proxClima():
-    link = f"https://api.openweathermap.org/data/2.5/forecast?q={cidade}&lang=pt_br&appid={os.getenv('API_KEY')}"
+def proxClima(city):
+    link = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&lang=pt_br&appid={os.getenv('API_KEY')}"
     requisição = requests.get(link)
     requisição_dic=requisição.json()
     print(requisição_dic)

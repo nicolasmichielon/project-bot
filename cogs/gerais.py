@@ -33,8 +33,8 @@ class gerais(commands.Cog):
         await ctx.send(f"{translator.translate(Joking.random_joke())}")
 
     @comando.command(help="Ver o clima agora")
-    async def clima(self, ctx):
-        await ctx.send(clima.climaAgora())
+    async def clima(self, ctx, *city):
+        await ctx.send(clima.climaAgora(city))
 
 
 async def setup(bot: commands.Bot):
