@@ -16,13 +16,31 @@ class gerais(commands.Cog):
 
     intents = discord.Intents.default()
     intents.message_content = True
-    comando = commands.Bot(command_prefix='!', intents=intents)
+    comando = commands.Bot(command_prefix='?', intents=intents)
 
-    @comando.command(help="Rola um dado até X valor limite")
+    @comando.command(help="Rola um dado até X valor limite", aliases=("r", "rolls"))
     async def roll(self, ctx, number):
-        await ctx.channel.purge(limit=1)
-        r = random.randint(0, int(number))
-        await ctx.send(f"🎲 {ctx.author.mention}\n {r}")
+        await ctx.message.delete()
+        if 'd' in str(number):
+            numbers = number.split('d')
+            if int(numbers[0]) > 500:
+                await ctx.send("O máximo de dados simultâneos é 500.")
+                print("dados")
+                return
+            results = []
+            results_string = "("
+            for i in range(0, int(numbers[0])):
+                random_num = random.randint(1, int(numbers[1]))
+                results.append(random_num)
+                results_string += f"**{str(random_num) }**" if random_num == int(numbers[1]) else str(random_num)
+                results_string += ", " if int(numbers[0])-1 != i else ""
+            results_string += ")"
+            embed = discord.Embed(title=f":game_die: @{ctx.author.name}", description=f"**Result:** {number} {results_string}\n**Total:** {sum(results)}")
+            await ctx.send(embed=embed)
+            #await ctx.send(f"🎲 {ctx.author.mention}\n**Result** {number} {results_string}\n**Total:** {sum(results)}")
+        else:
+            r = random.randint(0, int(number))
+            await ctx.send(f"🎲 {ctx.author.mention}\n {r}")
 
     # command to clear channel messages
     @comando.command(help="Apaga X mensagens do chat")
