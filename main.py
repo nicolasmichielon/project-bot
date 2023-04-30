@@ -9,7 +9,7 @@ import os
 intents = discord.Intents.default()
 intents.message_content = True
 translator = Translator(to_lang="pt-br")
-client = commands.Bot(command_prefix='!', intents=intents)  # prefix our commands with '.'
+client = commands.Bot(command_prefix='?', intents=intents)  # prefix our commands with '.'
 
 
 async def load_extensions():
