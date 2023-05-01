@@ -12,7 +12,6 @@ ckey = "my_test_app"  # set the client_key for the integration and use the same 
 def gifSearch(search_term):
     search_term = ' '.join(search_term)
 
-    # get the top 8 GIFs for the search term
     r = requests.get(
         "https://tenor.googleapis.com/v2/search?q=%s&key=%s&client_key=%s&limit=%s" % (search_term, apikey, ckey,  lmt))
 
