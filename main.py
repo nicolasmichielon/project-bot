@@ -32,7 +32,6 @@ async def on_message(message):
 @client.listen()
 async def on_ready():
     print('Bot online')
-
 load_dotenv()
 
 

@@ -5,8 +5,8 @@ from discord.ext import commands
 import random
 import Joking
 from translate import Translator
-from functions import clima, ajuda
-from functions import news, roll, coinflip, gifs
+from functions import clima, ajuda, dollarHoje
+from functions import news, roll
 
 translator = Translator(to_lang="pt-br")
 
@@ -30,7 +30,7 @@ class gerais(commands.Cog):
     async def clear(self, ctx, amount=5):
         await ctx.channel.purge(limit=amount)
 
-    @comando.command(help="Conta uma piada")
+    @comando.hybrid_command(help="Conta uma piada")
     async def joke(self, ctx):
         await ctx.send(f"{Joking.random_joke()}")
 
@@ -49,15 +49,9 @@ class gerais(commands.Cog):
     @comando.command(help="Ver todos os comandos")
     async def assist(self, ctx, *mensagem):
         await ctx.send(embed=ajuda.ajuda(mensagem))
-
-    @comando.command(help="Cara ou coroa")
-    async def coinflip(self, ctx):
-        await ctx.send(embed=coinflip.coinflip(ctx))
-
-    @comando.command(help="Procura um gif")
-    async def gif(self, ctx, *termo):
-        await ctx.send(gifs.gifSearch(termo))
-
+    @comando.command(help="Ver o valor do dólar")
+    async def dollar(self, ctx, *mensagem):
+        await ctx.send(embed=dollarHoje.moeda())
 
 
 
