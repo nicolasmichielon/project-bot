@@ -1,3 +1,5 @@
+import asyncio
+
 import discord
 from discord.ext import commands
 import random
@@ -41,12 +43,13 @@ class gerais(commands.Cog):
         await ctx.send(embed=clima.proxClima(city))
 
     @comando.command(help="Pesquisar uma notícia")
-    async def news(self, ctx, *termo):
-        await ctx.send(embed=news.searchNews(termo))
+    async def news(self, ctx):
+        await news.searchNews(ctx)
 
     @comando.command(help="Ver todos os comandos")
     async def assist(self, ctx, *mensagem):
         await ctx.send(embed=ajuda.ajuda(mensagem))
+
 
 
 async def setup(bot: commands.Bot):
