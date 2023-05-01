@@ -35,3 +35,21 @@ def kiss(ctx, user):
     embed = Embed(description=f"{ctx.author.mention} beijou {user}")
     embed.set_image(url=gif_url)
     return embed
+
+def punch(ctx, user):
+    gif_url = gifSearch('anime punch')
+    embed = Embed(description=f"{ctx.author.mention} socou {user}")
+    embed.set_image(url=gif_url)
+    return embed
+
+def hug(ctx, user):
+    gif_url = gifSearch('anime hug')
+    embed = Embed(description=f"{ctx.author.mention} abraçou {user}")
+    embed.set_image(url=gif_url)
+    return embed
+
+def laugh(ctx):
+    gif_url = gifSearch('anime laugh')
+    embed = Embed(description=f"{ctx.author.mention} ri, apenas.")
+    embed.set_image(url=gif_url)
+    return embed

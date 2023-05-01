@@ -70,6 +70,19 @@ class gerais(commands.Cog):
     async def kiss(self, ctx, user):
         await ctx.send(embed=gifs.kiss(ctx, user))
 
+    @comando.command(help="Soca alguém")
+    async def punch(self, ctx, user):
+        await ctx.send(embed=gifs.punch(ctx, user))
+
+    @comando.command(help="Abraça alguém")
+    async def hug(self, ctx, user):
+        await ctx.send(embed=gifs.hug(ctx, user))
+
+    @comando.command(help="Ri")
+    async def laugh(self, ctx):
+        await ctx.send(embed=gifs.laugh(ctx))
+
+
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(gerais(bot))
