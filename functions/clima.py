@@ -1,5 +1,5 @@
 import os
-
+from datetime import datetime
 import discord
 from unidecode import unidecode
 import requests
@@ -16,17 +16,37 @@ def climaAgora(city):
 
     return str(f"A temperatura está em {temp: .2f}") + " ºC, " + descricao
 
+from datetime import datetime
+
 def proxClima(city):
-    lista=[]
-    var=0
+    lista = []
+    var = 0
     link = f"https://api.openweathermap.org/data/2.5/forecast?q={unidecode(' '.join(city))}&lang=pt_br&appid={os.getenv('API_KEY')}"
     requisição = requests.get(link)
-    requisição_dic=requisição.json()
+    requisição_dic = requisição.json()
     nome = requisição_dic['city']['name']
-    for i in range(4,39,8):
-        requisição_dic1 = requisição_dic['list'][i]['weather'][0]['description']
-        lista.append(requisição_dic1)
-    embed = discord.Embed(title=f"Clima daqui a 5 dias em {nome}  ", description=f"dia 1 -> {lista[0]} \ndia 2 -> {lista[1]} \ndia 3 -> {lista[2]} \ndia 4 -> {lista[3]} \ndia 5 -> {lista[4]}")
+    datas = []
+    for i in range(4, 39, 8):
+        # Converte o campo dt_txt para um objeto datetime e extrai o dia do ano
+        dia_do_ano = datetime.strptime(requisição_dic['list'][i]['dt_txt'], '%Y-%m-%d %H:%M:%S').strftime('%d/%m')
+        if dia_do_ano not in datas:
+            datas.append(dia_do_ano)
+            clima = requisição_dic['list'][i]['weather'][0]['description'].upper()
+            icone = ''
+            if 'NUBLADO' in clima:
+                icone = ':cloud:'
+            elif 'CHUVA' in clima:
+                icone = ':cloud_with_rain:'
+            elif 'SOL' in clima or 'CLARO' in clima or 'CÉU LIMPO' in clima:
+                icone = ':sunny:'
+            elif 'NEVE' in clima:
+                icone = ':cloud_with_snow:'
+            elif 'ALGUMAS NUVENS' in clima:
+                icone= ':white_sun_cloud:'
+            lista.append(f"{icone} {clima}")
+    embed = discord.Embed(title=f"Previsão do tempo para os próximos 5 dias em {nome}", color=0x1db6e0)
+    embed.set_thumbnail(url='https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png')
+    for i in range(len(lista)):
+        embed.add_field(name=f'{datas[i]}', value=lista[i], inline=False)
     return embed
-
 
