@@ -2,6 +2,7 @@ import json
 from os import getenv
 from random import randint
 import requests
+from discord import Embed
 
 # set the apikey and limit
 apikey = getenv("API_KEY_TENOR")
@@ -10,7 +11,8 @@ ckey = "my_test_app"  # set the client_key for the integration and use the same 
 
 
 def gifSearch(search_term):
-    search_term = ' '.join(search_term)
+    if type(search_term) is list:
+        search_term = ' '.join(search_term)
 
     r = requests.get(
         "https://tenor.googleapis.com/v2/search?q=%s&key=%s&client_key=%s&limit=%s" % (search_term, apikey, ckey,  lmt))
@@ -21,3 +23,15 @@ def gifSearch(search_term):
         return url
     else:
         return "Nenhum GIF encontrado."
+
+def slap(ctx, user):
+    gif_url = gifSearch('anime slap')
+    embed = Embed(description=f"{ctx.author.mention} deu um tapa em {user}")
+    embed.set_image(url=gif_url)
+    return embed
+
+def kiss(ctx, user):
+    gif_url = gifSearch('anime kiss')
+    embed = Embed(description=f"{ctx.author.mention} beijou {user}")
+    embed.set_image(url=gif_url)
+    return embed

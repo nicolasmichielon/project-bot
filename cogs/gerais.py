@@ -62,6 +62,14 @@ class gerais(commands.Cog):
     async def gif(self, ctx, *termo):
         await ctx.send(gifs.gifSearch(termo))
 
+    @comando.command(help="Da um tapa")
+    async def slap(self, ctx, user):
+        await ctx.send(embed=gifs.slap(ctx, user))
+
+    @comando.command(help="Beija alguém")
+    async def kiss(self, ctx, user):
+        await ctx.send(embed=gifs.kiss(ctx, user))
+
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(gerais(bot))
