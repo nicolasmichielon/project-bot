@@ -22,7 +22,6 @@ async def load_extensions():
 async def on_message(message):
     if message.author == client.user:
         return
-    print('aaaa')
     username = str(message.author)
     user_message = str(message.content)
     if username == 'Herdt7#7023':
