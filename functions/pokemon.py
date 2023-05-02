@@ -2,27 +2,24 @@ import random
 import requests
 from discord import Embed
 
-from functions import gifs
-
-
 def pokemon(ctx):
     link = "https://pokeapi.co/api/v2/pokedex/1"
-    requisição = requests.get(link)
-    requisição_dic = requisição.json()
-    aleatorio= random.randint(0,1009)
-    descricao = requisição_dic['pokemon_entries'][aleatorio]['pokemon_species']['name']
-    print(descricao)
-    linkPokemon=f"https://pokeapi.co/api/v2/pokemon/{descricao}"
-    requisiçãoPoke = requests.get(linkPokemon)
-    requisição_dicPoke = requisiçãoPoke.json()
-    descricaoPoke = requisição_dicPoke['sprites']['other']['official-artwork']['front_default']
-    tipos = [tipo['type']['name'] for tipo in requisição_dicPoke['types']]
-    fraquezas = []
-    for tipo in requisição_dicPoke['types']:
-        linkTipo = tipo['type']['url']
-        requisiçãoTipo = requests.get(linkTipo)
-        requisição_dicTipo = requisiçãoTipo.json()
-        fraquezas += [fraqueza['name'] for fraqueza in requisição_dicTipo['damage_relations']['double_damage_from']]
+    request = requests.get(link)
+    request_dic = request.json()
+    randons= random.randint(0,1009)
+    descriptions = request_dic['pokemon_entries'][randons]['pokemon_species']['name']
+    print(descriptions)
+    linkPokemon=f"https://pokeapi.co/api/v2/pokemon/{descriptions}"
+    requestPoke = requests.get(linkPokemon)
+    request_dicPoke = requestPoke.json()
+    descriptionPoke = request_dicPoke['sprites']['other']['official-artwork']['front_default']
+    types = [tipo['type']['name'] for tipo in request_dicPoke['types']]
+    weaknesses = []
+    for tipo in request_dicPoke['types']:
+        linkType = tipo['type']['url']
+        requestType = requests.get(linkType)
+        request_dicType = requestType.json()
+        weaknesses += [weakness['name'] for weakness in request_dicType['damage_relations']['double_damage_from']]
     emojis = {
         'normal': ':white_large_square:',
         'fire': ':fire:',
@@ -43,7 +40,7 @@ def pokemon(ctx):
         'steel': ':gear:',
         'fairy': ':sparkles:'
     }
-    titulo = f"{descricao.capitalize()}\nTipo: {' '.join(emojis[tipo] for tipo in tipos)}\nFraquezas: {' '.join(emojis[fraqueza] for fraqueza in fraquezas)}"
+    titulo = f"{descriptions.capitalize()}\nTipo: {' '.join(emojis[type] for type in types)}\nFraquezas: {' '.join(emojis[fraqueza] for fraqueza in weaknesses)}"
     embed = Embed(title=titulo)
-    embed.set_image(url=descricaoPoke)
+    embed.set_image(url=descriptionPoke)
     return embed

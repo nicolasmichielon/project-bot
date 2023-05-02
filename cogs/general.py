@@ -2,13 +2,13 @@ import discord
 from discord.ext import commands
 import Joking
 from translate import Translator
-from functions import clima, ajuda, dollarHoje, pokemon
-from functions import news, roll, gifs, coinflip
+from functions import weather, assist, dollarToday, pokemon
+from functions import news, roll, gifs, coinFlip
 
 translator = Translator(to_lang="pt-br")
 
 
-class gerais(commands.Cog):
+class Gerais(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
@@ -33,27 +33,27 @@ class gerais(commands.Cog):
 
     @comando.command(help="Ver o clima agora")
     async def weather(self, ctx, *city):
-        await ctx.send(clima.climaAgora(city))
+        await ctx.send(weather.weather(city))
 
     @comando.command(help="Ver o clima nos próximos 5 dias")
     async def forecast(self, ctx, *city):
-        await ctx.send(embed=clima.proxClima(city))
+        await ctx.send(embed=weather.forecast(city))
 
     @comando.command(help="Pesquisar uma notícia")
     async def news(self, ctx):
         await news.searchNews(ctx)
 
     @comando.command(help="Ver todos os comandos")
-    async def assist(self, ctx, *mensagem):
-        await ctx.send(embed=ajuda.ajuda(mensagem))
+    async def assist(self, ctx, *message):
+        await ctx.send(embed=assist.assist(message))
 
     @comando.command(help="Ver o valor do dólar")
-    async def dollar(self, ctx, *mensagem):
-        await ctx.send(embed=dollarHoje.moeda())
+    async def dollar(self, ctx):
+        await ctx.send(embed=dollarToday.coin())
 
     @comando.command(help="Cara ou coroa")
     async def coinflip(self, ctx):
-        await ctx.send(embed=coinflip.coinflip(ctx))
+        await ctx.send(embed=coinFlip.coinFlip(ctx))
 
     @comando.command(help="Procura um gif")
     async def gif(self, ctx, *termo):
@@ -85,4 +85,4 @@ class gerais(commands.Cog):
 
 
 async def setup(bot: commands.Bot):
-    await bot.add_cog(gerais(bot))
+    await bot.add_cog(Gerais(bot))
