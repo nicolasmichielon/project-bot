@@ -16,7 +16,34 @@ def pokemon(ctx):
     requisiçãoPoke = requests.get(linkPokemon)
     requisição_dicPoke = requisiçãoPoke.json()
     descricaoPoke = requisição_dicPoke['sprites']['other']['official-artwork']['front_default']
-    descricao = descricao.capitalize()
-    embed = Embed(title=f"{descricao}")
+    tipos = [tipo['type']['name'] for tipo in requisição_dicPoke['types']]
+    fraquezas = []
+    for tipo in requisição_dicPoke['types']:
+        linkTipo = tipo['type']['url']
+        requisiçãoTipo = requests.get(linkTipo)
+        requisição_dicTipo = requisiçãoTipo.json()
+        fraquezas += [fraqueza['name'] for fraqueza in requisição_dicTipo['damage_relations']['double_damage_from']]
+    emojis = {
+        'normal': ':white_large_square:',
+        'fire': ':fire:',
+        'water': ':droplet:',
+        'electric': ':zap:',
+        'grass': ':leaves:',
+        'ice': ':snowflake:',
+        'fighting': ':boxing_glove:',
+        'poison': ':skull:',
+        'ground': ':mountain:',
+        'flying': ':eagle:',
+        'psychic': ':crystal_ball:',
+        'bug': ':bug:',
+        'rock': ':mountain:',
+        'ghost': ':ghost:',
+        'dragon': ':dragon:',
+        'dark': ':black_square_button:',
+        'steel': ':gear:',
+        'fairy': ':sparkles:'
+    }
+    titulo = f"{descricao.capitalize()}\nTipo: {' '.join(emojis[tipo] for tipo in tipos)}\nFraquezas: {' '.join(emojis[fraqueza] for fraqueza in fraquezas)}"
+    embed = Embed(title=titulo)
     embed.set_image(url=descricaoPoke)
     return embed

@@ -1,8 +1,5 @@
-import asyncio
-
 import discord
 from discord.ext import commands
-import random
 import Joking
 from translate import Translator
 from functions import clima, ajuda, dollarHoje, pokemon
