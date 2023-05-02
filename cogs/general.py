@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import Joking
 from translate import Translator
-from functions import weather, assist, dollarToday, pokemon
+from functions import weather, assist, coinToday, pokemon
 from functions import news, roll, gifs, coinFlip
 
 translator = Translator(to_lang="pt-br")
@@ -47,9 +47,12 @@ class Gerais(commands.Cog):
     async def assist(self, ctx, *message):
         await ctx.send(embed=assist.assist(message))
 
+    @comando.command(help="Ver o valor do real")
+    async def real(self, ctx):
+        await ctx.send(embed=coinToday.realToday())
     @comando.command(help="Ver o valor do dólar")
     async def dollar(self, ctx):
-        await ctx.send(embed=dollarToday.coin())
+        await ctx.send(embed=coinToday.dollarToday())
 
     @comando.command(help="Cara ou coroa")
     async def coinflip(self, ctx):

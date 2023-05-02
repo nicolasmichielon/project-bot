@@ -4,6 +4,7 @@ import discord
 def assist(message):
     message = ("***?clear*** -> Apaga X mensagens do chat\n" +
                 "***?coinflip***-> Cara ou coroa\n" +
+                "***?real*** -> Ver o valor do real hoje\n" +
                 "***?dollar*** -> Ver o valor do dólar hoje\n" +
                 "***?forecast*** -> Ver o clima nos próximos 5 dias\n" +
                 "***?gif*** -> Procure um gif\n" +
