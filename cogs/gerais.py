@@ -5,7 +5,7 @@ from discord.ext import commands
 import random
 import Joking
 from translate import Translator
-from functions import clima, ajuda, dollarHoje
+from functions import clima, ajuda, dollarHoje, pokemon
 from functions import news, roll, gifs, coinflip
 
 translator = Translator(to_lang="pt-br")
@@ -81,6 +81,9 @@ class gerais(commands.Cog):
     @comando.command(help="Ri")
     async def laugh(self, ctx):
         await ctx.send(embed=gifs.laugh(ctx))
+    @comando.command(help="Gera um pokémon aleatório")
+    async def pokemon(self, ctx):
+        await ctx.send(embed=pokemon.pokemon(ctx))
 
 
 

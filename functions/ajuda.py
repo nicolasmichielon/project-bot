@@ -9,6 +9,7 @@ def ajuda(mensagem):
                 "?roll -> Rola um dado até X valor limite\n"+
                 "?forecast -> Ver o clima nos próximos 5 dias\n" +
                 "?weather -> Ver o clima agora"
-                "?dollar -> Ver o valor do dólar hoje")
+                "?dollar -> Ver o valor do dólar hoje\n"+
+                "?pokemon -> Gerar um Pokémon aleatório")
     embed = discord.Embed(title="Comandos", description= mensagem)
     return embed
