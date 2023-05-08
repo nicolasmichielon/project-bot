@@ -1,6 +1,6 @@
 # Bot do Discord
 ## Requerimentos
-Para usar o programa, extrair o arquivo .exe do arquivo .rar e criar um .env com o seguinte comando: 
+Para usar o bot, crie uma .env com as seguintes variáveis: 
 
 DISCORD_TOKEN=suatokenaqui
 
