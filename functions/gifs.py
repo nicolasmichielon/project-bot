@@ -10,7 +10,7 @@ lmt = 20
 ckey = "my_test_app"  # set the client_key for the integration and use the same value for all API calls
 
 
-def gifSearch(search_term):
+def gif_search(search_term):
     if type(search_term) is list:
         search_term = ' '.join(search_term)
 
@@ -24,32 +24,37 @@ def gifSearch(search_term):
     else:
         return "Nenhum GIF encontrado."
 
+
 def slap(ctx, user):
-    gif_url = gifSearch('anime slap')
+    gif_url = gif_search('anime slap')
     embed = Embed(description=f"{ctx.author.mention} deu um tapa em {user}")
     embed.set_image(url=gif_url)
     return embed
 
+
 def kiss(ctx, user):
-    gif_url = gifSearch('anime kiss')
+    gif_url = gif_search('anime kiss')
     embed = Embed(description=f"{ctx.author.mention} beijou {user}")
     embed.set_image(url=gif_url)
     return embed
 
+
 def punch(ctx, user):
-    gif_url = gifSearch('anime punch')
+    gif_url = gif_search('anime punch')
     embed = Embed(description=f"{ctx.author.mention} socou {user}")
     embed.set_image(url=gif_url)
     return embed
 
+
 def hug(ctx, user):
-    gif_url = gifSearch('anime hug')
+    gif_url = gif_search('anime hug')
     embed = Embed(description=f"{ctx.author.mention} abraçou {user}")
     embed.set_image(url=gif_url)
     return embed
 
+
 def laugh(ctx):
-    gif_url = gifSearch('anime laugh')
+    gif_url = gif_search('anime laugh')
     embed = Embed(description=f"{ctx.author.mention} ri, apenas.")
     embed.set_image(url=gif_url)
     return embed

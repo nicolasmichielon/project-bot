@@ -2,19 +2,20 @@ import random
 import requests
 from discord import Embed
 
+
 def pokemon(ctx):
     link = "https://pokeapi.co/api/v2/pokedex/1"
     request = requests.get(link)
     request_dic = request.json()
-    randons= random.randint(0,1009)
+    randons = random.randint(0, 1009)
     descriptions = request_dic['pokemon_entries'][randons]['pokemon_species']['name']
-    print(descriptions)
     linkPokemon=f"https://pokeapi.co/api/v2/pokemon/{descriptions}"
     requestPoke = requests.get(linkPokemon)
     request_dicPoke = requestPoke.json()
     descriptionPoke = request_dicPoke['sprites']['other']['official-artwork']['front_default']
     types = [tipo['type']['name'] for tipo in request_dicPoke['types']]
     weaknesses = []
+
     for tipo in request_dicPoke['types']:
         linkType = tipo['type']['url']
         requestType = requests.get(linkType)

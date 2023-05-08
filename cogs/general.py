@@ -22,7 +22,6 @@ class Gerais(commands.Cog):
         await ctx.message.delete()
         await ctx.send(embed=roll.roll(ctx, number))
 
-    # command to clear channel messages
     @comando.command(help="Apaga X mensagens do chat")
     async def clear(self, ctx, amount=5):
         await ctx.channel.purge(limit=amount)
@@ -39,7 +38,7 @@ class Gerais(commands.Cog):
     async def forecast(self, ctx, *city):
         await ctx.send(embed=weather.forecast(city))
 
-    @comando.command(help="Pesquisar uma notícia")
+    @comando.command(help="Pesquisar notícias")
     async def news(self, ctx):
         await news.searchNews(ctx)
 
@@ -50,6 +49,7 @@ class Gerais(commands.Cog):
     @comando.command(help="Ver o valor do real")
     async def real(self, ctx):
         await ctx.send(embed=coinToday.realToday())
+
     @comando.command(help="Ver o valor do dólar")
     async def dollar(self, ctx):
         await ctx.send(embed=coinToday.dollarToday())
@@ -60,7 +60,7 @@ class Gerais(commands.Cog):
 
     @comando.command(help="Procura um gif")
     async def gif(self, ctx, *termo):
-        await ctx.send(gifs.gifSearch(termo))
+        await ctx.send(gifs.gif_search(termo))
 
     @comando.command(help="Da um tapa")
     async def slap(self, ctx, user):
@@ -81,10 +81,10 @@ class Gerais(commands.Cog):
     @comando.command(help="Ri")
     async def laugh(self, ctx):
         await ctx.send(embed=gifs.laugh(ctx))
+
     @comando.command(help="Gera um pokémon aleatório")
     async def pokemon(self, ctx):
         await ctx.send(embed=pokemon.pokemon(ctx))
-
 
 
 async def setup(bot: commands.Bot):

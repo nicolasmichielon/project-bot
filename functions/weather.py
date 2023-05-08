@@ -1,13 +1,14 @@
-import os
+from os import getenv
 from datetime import datetime
 import discord
 from unidecode import unidecode
 import requests
+from datetime import datetime
 
 
 def weather(city):
     print(' '.join(city))
-    link =f"https://api.openweathermap.org/data/2.5/weather?q={unidecode(' '.join(city))}&lang=pt_br&appid={os.getenv('API_KEY')}"
+    link =f"https://api.openweathermap.org/data/2.5/weather?q={unidecode(' '.join(city))}&lang=pt_br&appid={getenv('API_KEY')}"
 
     requisição = requests.get(link)
     requisição_dic=requisição.json()
@@ -16,11 +17,10 @@ def weather(city):
 
     return str(f"A temperatura está em {temp: .2f}") + " ºC, " + descricao
 
-from datetime import datetime
 
 def forecast(city):
     list = []
-    link = f"https://api.openweathermap.org/data/2.5/forecast?q={unidecode(' '.join(city))}&lang=pt_br&appid={os.getenv('API_KEY')}"
+    link = f"https://api.openweathermap.org/data/2.5/forecast?q={unidecode(' '.join(city))}&lang=pt_br&appid={getenv('API_KEY')}"
     request = requests.get(link)
     request_dic = request.json()
     name = request_dic['city']['name']

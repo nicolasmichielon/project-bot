@@ -1,6 +1,7 @@
 from random import randint
 from discord import Embed
 
+
 def coinFlip(ctx):
     coin = randint(0, 1)
     message = f"{ctx.author.mention} "
