@@ -8,3 +8,4 @@ DISCORD_TOKEN=suatokenaqui
 
 [API_KEY_TENOR=SuaApiKeyAqui](https://developers.google.com/tenor/guides/quickstart)
 
+### Projeto feito por Nicolas Cunha e Renan Prazeres
