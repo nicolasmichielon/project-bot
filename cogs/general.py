@@ -2,8 +2,9 @@ import discord
 from discord.ext import commands
 import Joking
 from translate import Translator
-from functions import weather, assist, coinToday, pokemon
-from functions import news, roll, gifs, coinFlip
+from functions import assist, coinToday, pokemon
+from functions import roll, gifs, coinFlip
+from functions.media import news, weather, movie
 
 translator = Translator(to_lang="pt-br")
 
@@ -35,6 +36,9 @@ class Gerais(commands.Cog):
     async def weather(self, ctx, *city):
         await ctx.send(weather.weather(city))
 
+    @comando.command(help="Pesquisa um filme")
+    async def searchmovie(self, ctx,*movie_name):
+        await ctx.send(embed=movie.searchMovie(movie_name))
     @comando.command(help="Ver o clima nos próximos 5 dias")
     async def forecast(self, ctx, *city):
         await ctx.send(embed=weather.forecast(city))
@@ -84,8 +88,6 @@ class Gerais(commands.Cog):
     @comando.command(help="Gera um pokémon aleatório")
     async def pokemon(self, ctx):
         await ctx.send(embed=pokemon.pokemon(ctx))
-
-
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Gerais(bot))
