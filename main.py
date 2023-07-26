@@ -38,5 +38,4 @@ async def main():
     async with client:
         await load_extensions()
         await client.start(os.getenv('DISCORD_TOKEN'))
-
 asyncio.run(main())
