@@ -31,7 +31,6 @@ def convert_to_stars(rating):
 def searchMovie(movie):
 
     link = f"https://api.themoviedb.org/3/search/movie?language=pt-BR&query={unidecode('+'.join(movie))}&api_key={os.getenv('API_KEY_FILME')}"
-    print(link)
     requisicao = requests.get(link)
     requisicao_dic = requisicao.json()
 

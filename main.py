@@ -22,10 +22,6 @@ async def load_extensions():
 async def on_message(message):
     if message.author == client.user:
         return
-    username = str(message.author)
-    user_message = str(message.content)
-    if username == 'Herdt7#7023':
-        await message.add_reaction('🤓')
 
 
 @client.listen()
@@ -38,4 +34,5 @@ async def main():
     async with client:
         await load_extensions()
         await client.start(os.getenv('DISCORD_TOKEN'))
+
 asyncio.run(main())
