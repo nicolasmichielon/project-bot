@@ -1,13 +1,14 @@
 import discord
 from discord.ext import commands
 import Joking
+from discord.ext.commands import DefaultHelpCommand
 from translate import Translator
 from functions import assist, coinToday, pokemon
 from functions import roll, gifs, coinFlip
+from functions.clashRoyale import clashroyale
 from functions.media import news, weather, movie
 
 translator = Translator(to_lang="pt-br")
-
 
 class Gerais(commands.Cog):
 
@@ -16,7 +17,8 @@ class Gerais(commands.Cog):
 
     intents = discord.Intents.default()
     intents.message_content = True
-    comando = commands.Bot(command_prefix='?', intents=intents)
+    comando = commands.Bot(command_prefix="?", intents=intents)
+
 
     @comando.command(help="Rola um dado até X valor limite", aliases=("r", "rolls"))
     async def roll(self, ctx, number):
@@ -65,7 +67,12 @@ class Gerais(commands.Cog):
     @comando.command(help="Procura um gif")
     async def gif(self, ctx, *termo):
         await ctx.send(gifs.gifSearch(termo))
-
+    @comando.command(help="configura um clan no Clash Royale")
+    async def setclanCR(self, ctx, *clan):
+        await ctx.send(embed=await clashroyale.setClanRoyale(clan,ctx.guild,ctx))
+    @comando.command(help="Pesquisa um clan através da tag")
+    async def searchClanCR(self, ctx, *clan):
+        await ctx.send(embed= clashroyale.searchClanRoyale(clan))
     @comando.command(help="Da um tapa")
     async def slap(self, ctx, user):
         await ctx.send(embed=gifs.slap(ctx, user))

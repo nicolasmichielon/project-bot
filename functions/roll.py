@@ -20,7 +20,6 @@ def roll(ctx, number):
         embed = discord.Embed(title=f":game_die: @{ctx.author.name}",
                               description=f"**Result:** {number} {results_string}\n**Total:** {sum(results)}")
         return embed
-        # await ctx.send(f"🎲 {ctx.author.mention}\n**Result** {number} {results_string}\n**Total:** {sum(results)}")
     else:
         r = randint(0, int(number))
         embed = discord.Embed(title=f":game_die: @{ctx.author.name}",
