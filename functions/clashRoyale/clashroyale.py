@@ -6,6 +6,7 @@ from discord import Embed
 
 
 async def setClanRoyale(clan,guild,ctx):
+    """Configura um clan no Clash Royale"""
     try:
         clan = urllib.parse.quote_plus(clan[0])
         link =f"https://api.clashroyale.com/v1/clans/{clan}"
@@ -68,6 +69,7 @@ async def setClanRoyale(clan,guild,ctx):
 
 
 def searchClanRoyale(clan):
+    """Procura um clan no Clash Royale"""
     try:
         clan = urllib.parse.quote_plus(clan[0])
         link =f'https://api.clashroyale.com/v1/clans/{clan}'

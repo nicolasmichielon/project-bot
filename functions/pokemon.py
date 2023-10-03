@@ -3,6 +3,7 @@ import requests
 from discord import Embed
 
 def pokemon(ctx):
+    """Procurar o pokemon e imprimi-lo, mostrando o tipo, suas vantagens e desvantagens"""
     link = "https://pokeapi.co/api/v2/pokedex/1"
     request = requests.get(link)
     request_dic = request.json()

@@ -60,9 +60,9 @@ class Gerais(commands.Cog):
     @comando.command(help="Procura um gif")
     async def gif(self, ctx, *termo):
         await ctx.send(gifs.gifSearch(termo))
-    # @comando.command(help="configura um clan no Clash Royale")
-    # async def setclanCR(self, ctx, *clan):
-    #     await ctx.send(embed=await clashroyale.setClanRoyale(clan,ctx.guild,ctx))
+    @comando.command(help="configura um clan no Clash Royale")
+    async def setclanCR(self, ctx, *clan):
+        await ctx.send(embed=await clashroyale.setClanRoyale(clan,ctx.guild,ctx))
     @comando.command(help="Pesquisa um clan através da tag")
     async def searchClanCR(self, ctx, *clan):
         await ctx.send(embed= clashroyale.searchClanRoyale(clan))

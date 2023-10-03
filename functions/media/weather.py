@@ -6,6 +6,7 @@ import requests
 
 
 def weather(city):
+    """Procura a previsão de tempo para uma cidade para hoje"""
     print(' '.join(city))
     link =f"https://api.openweathermap.org/data/2.5/weather?q={unidecode(' '.join(city))}&lang=pt_br&appid={os.getenv('API_KEY')}"
 
@@ -19,6 +20,8 @@ def weather(city):
 from datetime import datetime
 
 def forecast(city):
+    """Procura a previsão de tempo para uma cidade para os próximos dias"""
+
     list = []
     link = f"https://api.openweathermap.org/data/2.5/forecast?q={unidecode(' '.join(city))}&lang=pt_br&appid={os.getenv('API_KEY')}"
     request = requests.get(link)

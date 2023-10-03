@@ -3,6 +3,7 @@ from random import randint
 
 
 def roll(ctx, number):
+    """Rola um número x de um dado"""
     if 'd' in str(number):
         numbers = number.split('d')
         if int(numbers[0]) > 500:

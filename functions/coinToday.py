@@ -1,6 +1,7 @@
 import discord
 import requests
 def realToday():
+    """Valor das moedas Dolar, Peso Argentino e Euro em relação ao Real"""
     link = "https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,ARS-BRL"
     request = requests.get(link)
     request_dic = request.json()
@@ -11,6 +12,7 @@ def realToday():
     embed = discord.Embed(title="💵 Real hoje", description=message)
     return embed
 def dollarToday():
+    """Valor das moedas Franco Suiço, Euro e Libra em relação ao Dollar"""
     link = "https://economia.awesomeapi.com.br/last/CHF-USD,EUR-USD,GBP-USD"
     request = requests.get(link)
     request_dic = request.json()

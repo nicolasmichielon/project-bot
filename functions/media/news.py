@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 
 async def searchNews(ctx):
+    """Pega noticias ligadas a tecnologia"""
     response = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json")
     top_stories = response.json()
 
