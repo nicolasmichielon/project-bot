@@ -1,9 +1,8 @@
+import Joking
 import discord
 from discord.ext import commands
-import Joking
-from discord.ext.commands import DefaultHelpCommand
 from translate import Translator
-from functions import assist, coinToday, pokemon
+from functions import coinToday, pokemon
 from functions import roll, gifs, coinFlip
 from functions.clashRoyale import clashroyale
 from functions.media import news, weather, movie
@@ -11,28 +10,25 @@ from functions.media import news, weather, movie
 translator = Translator(to_lang="pt-br")
 
 class Gerais(commands.Cog):
-
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
     intents = discord.Intents.default()
     intents.message_content = True
-    comando = commands.Bot(command_prefix="?", intents=intents)
-
+    comando = commands.Bot(command_prefix="?", intents=intents,help_command=None)
 
     @comando.command(help="Rola um dado até X valor limite", aliases=("r", "rolls"))
     async def roll(self, ctx, number):
         await ctx.message.delete()
         await ctx.send(embed=roll.roll(ctx, number))
 
-    # command to clear channel messages
     @comando.command(help="Apaga X mensagens do chat")
     async def clear(self, ctx, amount=5):
         await ctx.channel.purge(limit=amount)
 
     @comando.hybrid_command(help="Conta uma piada")
     async def joke(self, ctx):
-        await ctx.send(f"{Joking.random_joke()}")
+        await ctx.send(f"{Joking.DarkJoke()}")
 
     @comando.command(help="Ver o clima agora")
     async def weather(self, ctx, *city):
@@ -49,9 +45,6 @@ class Gerais(commands.Cog):
     async def news(self, ctx):
         await news.searchNews(ctx)
 
-    @comando.command(help="Ver todos os comandos")
-    async def assist(self, ctx, *message):
-        await ctx.send(embed=assist.assist(message))
 
     @comando.command(help="Ver o valor do real")
     async def real(self, ctx):
@@ -67,9 +60,9 @@ class Gerais(commands.Cog):
     @comando.command(help="Procura um gif")
     async def gif(self, ctx, *termo):
         await ctx.send(gifs.gifSearch(termo))
-    @comando.command(help="configura um clan no Clash Royale")
-    async def setclanCR(self, ctx, *clan):
-        await ctx.send(embed=await clashroyale.setClanRoyale(clan,ctx.guild,ctx))
+    # @comando.command(help="configura um clan no Clash Royale")
+    # async def setclanCR(self, ctx, *clan):
+    #     await ctx.send(embed=await clashroyale.setClanRoyale(clan,ctx.guild,ctx))
     @comando.command(help="Pesquisa um clan através da tag")
     async def searchClanCR(self, ctx, *clan):
         await ctx.send(embed= clashroyale.searchClanRoyale(clan))
@@ -95,6 +88,8 @@ class Gerais(commands.Cog):
     @comando.command(help="Gera um pokémon aleatório")
     async def pokemon(self, ctx):
         await ctx.send(embed=pokemon.pokemon(ctx))
+
+
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Gerais(bot))

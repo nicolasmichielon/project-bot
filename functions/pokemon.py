@@ -8,7 +8,6 @@ def pokemon(ctx):
     request_dic = request.json()
     randons= random.randint(0,1009)
     descriptions = request_dic['pokemon_entries'][randons]['pokemon_species']['name']
-    print(descriptions)
     linkPokemon=f"https://pokeapi.co/api/v2/pokemon/{descriptions}"
     requestPoke = requests.get(linkPokemon)
     request_dicPoke = requestPoke.json()

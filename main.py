@@ -7,13 +7,11 @@ from translate import Translator
 from discord.ext import commands
 import os
 
-
-
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 translator = Translator(to_lang="pt-br")
-client = commands.Bot(command_prefix="?", intents=intents)
+client = commands.Bot(command_prefix="?", intents=intents,help_command=None)
 
 
 async def load_extensions():
@@ -21,6 +19,75 @@ async def load_extensions():
         if filename.endswith('.py') and not filename.startswith('__'):
             await client.load_extension(f"cogs.{filename[:-3]}")
 
+
+@client.listen()
+async def on_message(message):
+    if message.content == "?help":
+        command_list = {
+            "Utilities Functions": [
+                ("?clear", "Apaga x mensagens"),
+                ("?weather", "Ver o clima agora"),
+                ("?forecast", "Ver o clima nos próximos 5 dias"),
+                ("?roll", "Rola um dado até X valor limite"),
+                ("?coinflip", "Cara ou coroa"),
+                ("?dollar", "Ver o valor do dólar hoje"),
+                ("?real", "Ver o valor do real hoje"),
+            ],
+            "Fun Functions": [
+                ("?gif", "Procure um gif"),
+                ("?searchmovie", "Pesquisa um filme"),
+                ("?hug", "Dê um abraço no seu amigo"),
+                ("?joke", "Conta uma piada"),
+                ("?kiss", "Dê um beijo no seu amigo"),
+                ("?laugh", "Ri"),
+                ("?news", "Pesquisar uma notícia"),
+                ("?pokemon", "Gerar um Pokémon aleatório"),
+                ("?punch", "Dê um soco no seu amigo"),
+                ("?slap", "Dê um tapa no seu amigo"),
+                ("?searchClanCR", "Pesquisa um clan no Clash Royale")
+            ]
+        }
+
+        pages = []
+
+        presentation_embed = discord.Embed(
+            title=f"Olá, sou o {client.user.name}! ",
+            description="Sou um bot em fase de teste, tentando me adaptar à esse mundo.",
+            color=discord.Color.blue()
+        )
+        presentation_embed.set_footer(text="Page 1/3")
+        pages.append(presentation_embed)
+
+        for category, commands in command_list.items():
+            embed = discord.Embed(
+                title=f"{category}",
+                color=discord.Color.green()
+            )
+            for name, value in commands:
+                embed.add_field(name=name, value=value, inline=False)
+            embed.set_footer(text=f"Page {len(pages)+1}/{len(command_list)+1}")
+
+            pages.append(embed)
+
+        current_page = 0
+        help_msg = await message.channel.send(embed=pages[current_page])
+        await help_msg.add_reaction("◀️")  # Previous page
+        await help_msg.add_reaction("▶️")  # Next page
+
+        def check(reaction, user):
+            return user == message.author and str(reaction.emoji) in ["◀️", "▶️"]
+
+        while True:
+            try:
+                reaction, user = await client.wait_for("reaction_add", timeout=60, check=check)
+            except TimeoutError:
+                break
+
+            if str(reaction.emoji) == "◀️" and current_page > 0:
+                current_page -= 1
+            elif str(reaction.emoji) == "▶️" and current_page < len(pages) - 1:
+                current_page += 1
+            await help_msg.edit(embed=pages[current_page])
 
 @client.listen()
 async def on_message(message):

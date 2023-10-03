@@ -6,7 +6,7 @@ from unidecode import unidecode
 
 
 def convert_to_stars(rating):
-    # Round the rating to the nearest 0.5
+    """Converte a classificação do filme em estrelas"""
     if rating % 1 == 0.5:
         rounded_rating = round(rating)
         if rounded_rating % 2 != 0:
@@ -29,6 +29,7 @@ def convert_to_stars(rating):
     return estrelas_str or 'N/A'
 
 def searchMovie(movie):
+    """Procura um filme"""
 
     link = f"https://api.themoviedb.org/3/search/movie?language=pt-BR&query={unidecode('+'.join(movie))}&api_key={os.getenv('API_KEY_FILME')}"
     requisicao = requests.get(link)
