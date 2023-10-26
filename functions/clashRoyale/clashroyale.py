@@ -80,8 +80,8 @@ def searchClanRoyale(clan):
         requisicao_dic = requisicao.json()
         clanName = requisicao_dic['name']
         clantag = requisicao_dic['tag']
-        descriptionClan = requisicao_dic['description']
-        clanTrophies = requisicao_dic['clanScore']
+        description_clan = requisicao_dic['description']
+        clan_trophies = requisicao_dic['clanScore']
         clanWarTrophies = requisicao_dic['clanWarTrophies']
         country = requisicao_dic['location']['countryCode']
         clanChest = requisicao_dic['clanChestLevel']
@@ -90,7 +90,7 @@ def searchClanRoyale(clan):
 
         embed = Embed(
             title=f"{clanName} :flag_{country.lower()}: {clantag}",
-            description=f"**Membros:** {members} | **Troféus do Clã:** {clanTrophies} 🏆\n{bau} **Nível do Baú do Clã:** {clanChest}\n🏆 **Troféus de Guerra do Clã:** {clanWarTrophies}\n**Descrição:** {descriptionClan}",
+            description=f"**Membros:** {members} | **Troféus do Clã:** {clan_trophies} 🏆\n{bau} **Nível do Baú do Clã:** {clanChest}\n🏆 **Troféus de Guerra do Clã:** {clanWarTrophies}\n**Descrição:** {description_clan}",
             color=0x3498db
         )
         return embed

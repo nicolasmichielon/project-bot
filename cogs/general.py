@@ -23,7 +23,7 @@ class Gerais(commands.Cog):
         await ctx.send(embed=roll.roll(ctx, number))
 
     @comando.command(help="Apaga X mensagens do chat")
-    async def clear(self, ctx, amount=5):
+    async def clear(self, ctx, amount=5 ):
         await ctx.channel.purge(limit=amount)
 
     @comando.hybrid_command(help="Conta uma piada")
@@ -60,7 +60,8 @@ class Gerais(commands.Cog):
     @comando.command(help="Procura um gif")
     async def gif(self, ctx, *termo):
         await ctx.send(gifs.gifSearch(termo))
-    @comando.command(help="configura um clan no Clash Royale")
+     
+    @comando.command(help="confsoundboardigura um clan no Clash Royale")
     async def setclanCR(self, ctx, *clan):
         await ctx.send(embed=await clashroyale.setClanRoyale(clan,ctx.guild,ctx))
     @comando.command(help="Pesquisa um clan através da tag")
@@ -85,6 +86,7 @@ class Gerais(commands.Cog):
     @comando.command(help="Ri")
     async def laugh(self, ctx):
         await ctx.send(embed=gifs.laugh(ctx))
+
     @comando.command(help="Gera um pokémon aleatório")
     async def pokemon(self, ctx):
         await ctx.send(embed=pokemon.pokemon(ctx))

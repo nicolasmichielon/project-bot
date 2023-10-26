@@ -9,17 +9,17 @@ def pokemon(ctx):
     request_dic = request.json()
     randons= random.randint(0,1009)
     descriptions = request_dic['pokemon_entries'][randons]['pokemon_species']['name']
-    linkPokemon=f"https://pokeapi.co/api/v2/pokemon/{descriptions}"
-    requestPoke = requests.get(linkPokemon)
-    request_dicPoke = requestPoke.json()
-    descriptionPoke = request_dicPoke['sprites']['other']['official-artwork']['front_default']
-    types = [tipo['type']['name'] for tipo in request_dicPoke['types']]
+    link_pokemon=f"https://pokeapi.co/api/v2/pokemon/{descriptions}"
+    request_poke = requests.get(link_pokemon)
+    request_dic_poke = request_poke.json()
+    description_poke = request_dic_poke['sprites']['other']['official-artwork']['front_default']
+    types = [tipo['type']['name'] for tipo in request_dic_poke['types']]
     weaknesses = []
-    for tipo in request_dicPoke['types']:
-        linkType = tipo['type']['url']
-        requestType = requests.get(linkType)
-        request_dicType = requestType.json()
-        weaknesses += [weakness['name'] for weakness in request_dicType['damage_relations']['double_damage_from']]
+    for tipo in request_dic_poke['types']:
+        link_type = tipo['type']['url']
+        request_type = requests.get(link_type)
+        request_dic_type = request_type.json()
+        weaknesses += [weakness['name'] for weakness in request_dic_type['damage_relations']['double_damage_from']]
     emojis = {
         'normal': ':white_large_square:',
         'fire': ':fire:',
@@ -42,5 +42,5 @@ def pokemon(ctx):
     }
     titulo = f"{descriptions.capitalize()}\nTipo: {' '.join(emojis[type] for type in types)}\nFraquezas: {' '.join(emojis[fraqueza] for fraqueza in weaknesses)}"
     embed = Embed(title=titulo)
-    embed.set_image(url=descriptionPoke)
+    embed.set_image(url=description_poke)
     return embed
