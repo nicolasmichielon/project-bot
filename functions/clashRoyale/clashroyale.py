@@ -74,11 +74,14 @@ def searchClanRoyale(clan):
         clan = urllib.parse.quote_plus(clan[0])
         link =f'https://api.clashroyale.com/v1/clans/{clan}'
         headers = {
-            'Authorization' : f'{os.getenv("API_KEY_CLASHROYALE")}'
+            'Authorization' : f'Bearer {os.getenv("API_KEY_CLASHROYALE")}'
         }
         requisicao = requests.get(link,headers)
+        print(requisicao)
         requisicao_dic = requisicao.json()
+        print(requisicao_dic)
         clanName = requisicao_dic['name']
+        print(clanName)
         clantag = requisicao_dic['tag']
         description_clan = requisicao_dic['description']
         clan_trophies = requisicao_dic['clanScore']

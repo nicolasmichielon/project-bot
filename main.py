@@ -82,11 +82,18 @@ async def on_message(message):
                 reaction, user = await client.wait_for("reaction_add", timeout=60, check=check)
             except TimeoutError:
                 break
-
-            if str(reaction.emoji) == "◀️" and current_page > 0:
-                current_page -= 1
-            elif str(reaction.emoji) == "▶️" and current_page < len(pages) - 1:
-                current_page += 1
+#and current_page > 0
+            if str(reaction.emoji) == "◀️":
+                if current_page > 0:
+                    current_page -= 1
+                else:
+                    current_page = 2
+#and current_page < len(pages) - 1
+            elif str(reaction.emoji) == "▶️":
+                if current_page < len(pages) -1:
+                    current_page += 1
+                else:
+                    current_page = 0
             await help_msg.edit(embed=pages[current_page])
 
 @client.listen()

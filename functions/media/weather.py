@@ -14,7 +14,7 @@ def weather(city):
     requisição_dic=requisição.json()
     descricao = requisição_dic['weather'][0]['description']
     temp = requisição_dic['main']['temp'] -273.15
-
+    print(temp)
     return str(f"A temperatura está em {temp: .2f}") + " ºC, " + descricao
 
 from datetime import datetime
