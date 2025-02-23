@@ -6,6 +6,7 @@ from functions import coinToday, pokemon
 from functions import roll, gifs, coinFlip
 from functions.clashRoyale import clashroyale
 from functions.media import news, weather, movie
+from functions.games import games
 
 translator = Translator(to_lang="pt-br")
 
@@ -90,6 +91,13 @@ class Gerais(commands.Cog):
     @comando.command(help="Gera um pokémon aleatório")
     async def pokemon(self, ctx):
         await ctx.send(embed=pokemon.pokemon(ctx))
+
+    @comando.command(help="Procura um jogo")
+    async def gameSearch(self, ctx, *game):
+        await ctx.send(embed= games.gameSearch(game))
+    @comando.command(help="Procura um jogo")
+    async def gameAchievements(self, ctx, *game):
+        await ctx.send(embed= games.gameAchievements(game))
 
 
 
